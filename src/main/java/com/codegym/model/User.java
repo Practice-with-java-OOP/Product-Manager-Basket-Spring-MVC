@@ -129,7 +129,7 @@ public class User implements Validator {
         }
 
         String pass = user.getPass();
-        ValidationUtils.rejectIfEmpty(errors, "pass", "pass.empty");
+        ValidationUtils.rejectIfEmpty(errors, "pass", "password.empty");
         if (pass.length() < 6) {
             errors.rejectValue("pass", "password.length");
         }
