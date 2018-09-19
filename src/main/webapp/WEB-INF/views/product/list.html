@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Product list</title>
 </head>
 <body>
-
+<h1>Product list</h1>
+<form>
+    Search user by name:
+    <input type="text" name="s"/>
+    <input type="submit" value="Search"/>
+</form>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>UploadImage</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Views</th>
+    </tr>
+    <th:block th:each="product : ${products}">
+        <tr>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td><a th:href="@{/products/uploadImage/__${product.id}__}">uploadImage</a></td>
+            <td><a th:href="@{/products/edit/__${product.id}__}">edit</a></td>
+            <td><a th:href="@{/products/delete/__${product.id}__}">delete</a></td>
+            <td><a th:href="@{/products/detail/__${product.id}__}">detail</a></td>
+        </tr>
+    </th:block>
+</table>
+<footer th:replace="layout::footer"></footer>
 </body>
 </html>
