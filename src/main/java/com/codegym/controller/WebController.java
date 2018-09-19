@@ -11,7 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.Cookie;
 
 @Controller
 public class WebController {
@@ -42,7 +45,9 @@ public class WebController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model) {
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
         return "/view/login";
     }
 

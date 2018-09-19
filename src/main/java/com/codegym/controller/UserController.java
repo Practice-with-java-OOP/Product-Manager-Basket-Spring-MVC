@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Role;
 import com.codegym.model.User;
+import com.codegym.service.role.RoleService;
 import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,14 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @ModelAttribute("roles")
+    public Iterable<Role> listRole() {
+        return roleService.finfAll();
+    }
 
     @GetMapping("/users")
     public String listUser(Model model) {
