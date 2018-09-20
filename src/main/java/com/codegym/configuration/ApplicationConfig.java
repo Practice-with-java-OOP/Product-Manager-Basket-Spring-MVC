@@ -1,6 +1,8 @@
 package com.codegym.configuration;
 
 import com.codegym.model.User;
+import com.codegym.service.goods.GoodsService;
+import com.codegym.service.goods.GoodsServiceImpl;
 import com.codegym.service.image.ImageService;
 import com.codegym.service.image.ImageServiceImpl;
 import com.codegym.service.product.ProductService;
@@ -83,6 +85,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public RoleService roleService() {
         return new RoleServiceImpl();
+    }
+
+    @Bean
+    public GoodsService goodsService() {
+        return new GoodsServiceImpl();
     }
 
 
