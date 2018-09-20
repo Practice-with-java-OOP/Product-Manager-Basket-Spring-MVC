@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,6 +38,7 @@ public class UploadFileController {
     @PostMapping("/products/upload")
     public String fileUpload(@RequestParam("file")CommonsMultipartFile[] files, @RequestParam("id") Long id) {
         final String UPLOADED_FOLDER = environment.getProperty("url.Image");
+        final String uploadRootDir = environment.getProperty("url.RootDir");
 
         Product product = productService.findById(id);
         List<Image> images = product.getImages();
@@ -46,7 +49,7 @@ public class UploadFileController {
             }
 
             Image image = new Image();
-            String name = UUID.randomUUID().toString();
+            String name = UUID.randomUUID().toString() + ".jpg";
 
             image.setName(name);
             image.setProduct(product);
@@ -55,6 +58,11 @@ public class UploadFileController {
             images.add(image);
 
             try {
+                File serverFile = new File(uploadRootDir + File.separator + name);
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                stream.write(multipartFile.getBytes());
+                stream.close();
+
                 byte[] bytes = multipartFile.getBytes();
                 Path filePath = Paths.get(UPLOADED_FOLDER + File.separator + image.getName());
                 Files.write(filePath, bytes);
