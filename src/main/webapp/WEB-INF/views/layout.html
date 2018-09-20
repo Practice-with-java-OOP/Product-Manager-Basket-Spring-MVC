@@ -10,6 +10,9 @@
     <script src="/resource/js/jquery-3.3.1.slim.min.js"></script>
     <script src="/resource/js/popper.min.js"></script>
     <script src="/resource/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resource/slideshow-ligthbox/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/resource/slideshow-ligthbox/js/fresco.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resource/slideshow-ligthbox/css/fresco/fresco.css"/>
 </head>
 <body>
 <menu th:fragment="menuHome">
@@ -67,35 +70,37 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <div class="MenuItems" th:text="${user.name}"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">
-                                    <div class="MenuItems">Logout</div>
-                                </a>
-                            </li>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <div class="MenuItems" th:text="${user.name}"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">
+                                        <div class="MenuItems">Logout</div>
+                                    </a>
+                                </li>
+                            </th:block>
                         </ul>
                     </div>
                 </div>
@@ -126,45 +131,47 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/products">
-                                    <div class="MenuItems">Products</div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">
-                                    <div class="MenuItems">Users</div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <div class="MenuItems" th:text="${user.name}"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">
-                                    <div class="MenuItems">Logout</div>
-                                </a>
-                            </li>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/products">
+                                        <div class="MenuItems">Products</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users">
+                                        <div class="MenuItems">Users</div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <div class="MenuItems" th:text="${user.name}"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">
+                                        <div class="MenuItems">Logout</div>
+                                    </a>
+                                </li>
+                            </th:block>
                         </ul>
                     </div>
                 </div>
@@ -232,7 +239,8 @@
                                 <div class="carousel-inner" th:if="${p.images.isEmpty()}">
                                     <div class="carousel-item">
                                         <a th:href="@{/products/detail/__${p.id}__}">
-                                            <img class="d-block w-100" src="/resource/image/Beautiful_Inside_Home_View_Photo.jpg"
+                                            <img class="d-block w-100"
+                                                 src="/resource/image/Beautiful_Inside_Home_View_Photo.jpg"
                                                  height="180px">
                                         </a>
                                     </div>
