@@ -3,6 +3,7 @@
 <head th:replace="layout::head"></head>
 <body>
 <menu th:replace="layout::menuAdmin"></menu>
+<div STYLE="margin-top: 50px"></div>
 <div class="container">
     <div class="row">
         <th:block th:if="${message}">
@@ -12,7 +13,7 @@
     <div class="row" th:if="${product.images==null}">
         <h3>There is no have any image. Do you want to add some image?</h3>
     </div>
-    <div class="row" th:unless="${product.images==null}">
+    <div class="row" th:unless="${product.images.isEmpty()}">
         <th:block th:each="im:${product.images}">
             <div class="col-lg-2 col-sm-4 col-md-3">
                 <div class="card-group">

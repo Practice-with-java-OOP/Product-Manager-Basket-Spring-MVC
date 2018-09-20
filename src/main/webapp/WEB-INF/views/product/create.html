@@ -6,29 +6,29 @@
 <div class="container">
     <div class="row" style="margin-top: 50px">
         <h1>Create new product</h1>
+    </div>
+    <div class="row">
         <form action="#" th:action="@{/products/create}" method="post" th:object="${product}">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="ProductName"/>
+                <label class="col-lg-4 col-form-label">Name</label>
+                <div class="col-lg-8">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="ProductName"/>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Price</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Price"/>
+                <label class="col-lg-4 col-form-label">Price</label>
+                <div class="col-lg-8 input-group">
+                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Price"
+                           aria-describedby="validationTooltipUsernamePrepend" th:field="*{price}" required>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="validationTooltipUsernamePrepend">VND</span>
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="ProductName"/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Description</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Description"/>
+                <label class="col-lg-4 col-form-label">Description</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" th:field="*{description}" placeholder="ProductName"/>
                 </div>
             </div>
             <input type="submit" value="Create"/>

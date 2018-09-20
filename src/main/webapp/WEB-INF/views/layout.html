@@ -220,12 +220,7 @@
             <th:block th:each="p:${products}">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card border-dark mb-3">
-                        <div class="card-img-top" th:if="${p.images.isEmpty()}">
-                            <img class="card-img-top" src="/resource/image/Beautiful_Inside_Home_View_Photo.jpg"
-                                 alt="Card image cap"
-                                 height="180px">
-                        </div>
-                        <div class="card-img-top" th:unless="${p.images.isEmpty()}" th:each="im:${p.images}">
+                        <div class="card-img-top">
                             <div th:id="${'carouselExampleIndicators'+p.id}" class="carousel slide"
                                  data-ride="carousel">
                                 <ol class="carousel-indicators">
@@ -234,11 +229,20 @@
                                     <li th:href="${'#carouselExampleIndicators'+p.id}" data-slide-to="1"></li>
                                     <li th:href="${'#carouselExampleIndicators'+p.id}" data-slide-to="2"></li>
                                 </ol>
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" th:if="${p.images.isEmpty()}">
                                     <div class="carousel-item">
-                                        <img class="card-img-top" th:src="@{/resource/image/__${im.name}__}"
-                                             alt="Card image cap"
-                                             height="180px">
+                                        <a th:href="@{/products/detail/__${p.id}__}">
+                                            <img class="d-block w-100" src="/resource/image/Beautiful_Inside_Home_View_Photo.jpg"
+                                                 height="180px">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="carousel-inner" th:unless="${p.images.isEmpty()}">
+                                    <div class="carousel-item" th:each="im:${p.images}">
+                                        <a th:href="@{/products/detail/__${p.id}__}">
+                                            <img class="d-block w-100" th:src="@{/resource/image/__${im.name}__}"
+                                                 height="180px">
+                                        </a>
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" th:href="${'#carouselExampleIndicators'+p.id}"
