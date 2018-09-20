@@ -1,7 +1,9 @@
 package com.codegym.controller;
 
+import com.codegym.model.Goods;
 import com.codegym.model.Product;
 import com.codegym.model.User;
+import com.codegym.service.goods.GoodsService;
 import com.codegym.service.product.ProductService;
 import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import java.util.UUID;
 
 @Controller
 public class ProductController {
@@ -24,6 +26,9 @@ public class ProductController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     private String getPrincipal() {
         String email = null;
@@ -55,7 +60,6 @@ public class ProductController {
     @PostMapping("/products/create")
     public String createProduct(@ModelAttribute("product") Product product, Model model) {
         User user = userService.findUserByEmail(getPrincipal());
-        product.setUser(user);
 
         productService.save(product);
         model.addAttribute("user", user);
@@ -118,5 +122,20 @@ public class ProductController {
         model.addAttribute("user", user);
         model.addAttribute("product", product);
         return "/image/upload";
+    }
+
+    @GetMapping("/products/addToBasket/{id}")
+    public String addToBasket(@PathVariable("id") Long id, @RequestParam("quantity") int quantity) {
+        Product product = productService.findById(id);
+        User user = userService.findUserByEmail(getPrincipal());
+
+        Goods goods = new Goods();
+        goods.setName(product.getName());
+        goods.setPrice(product.getPrice());
+        goods.setQuantity(quantity);
+        goods.setUser(user);
+
+        goodsService.save(goods);
+        return "redirect:/products/detail/{id}";
     }
 }
