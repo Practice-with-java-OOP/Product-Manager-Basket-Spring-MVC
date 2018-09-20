@@ -54,9 +54,10 @@ public class ProductController {
 
     @PostMapping("/products/create")
     public String createProduct(@ModelAttribute("product") Product product, Model model) {
-        productService.save(product);
         User user = userService.findUserByEmail(getPrincipal());
+        product.setUser(user);
 
+        productService.save(product);
         model.addAttribute("user", user);
         model.addAttribute("product", product);
         model.addAttribute("message", "Product created successfully");
