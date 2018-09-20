@@ -103,7 +103,9 @@ public class ProductController {
         if (product == null) {
             return "/error.404";
         }
+        User user = userService.findUserByEmail(getPrincipal());
 
+        model.addAttribute("user", user);
         model.addAttribute("product", product);
         return "/product/detail";
     }
