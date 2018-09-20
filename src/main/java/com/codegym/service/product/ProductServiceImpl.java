@@ -2,6 +2,7 @@ package com.codegym.service.product;
 
 import com.codegym.model.Product;
 import com.codegym.repository.ProductRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +14,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        Page<Product> products = productRepository.findAll(pageable);
+
+        products.forEach(product -> Hibernate.initialize(product.getImages()));
+        return products;
     }
 
     @Override
     public Product findById(Long id) {
-        return productRepository.findOne(id);
+        Product product = productRepository.findOne(id);
+        Hibernate.initialize(product.getImages());
+        return product;
     }
 
     @Override

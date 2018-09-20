@@ -15,9 +15,6 @@ public class Product {
     private double price;
     private String description;
     
-    @OneToMany(targetEntity = User.class)
-    List<User> users;
-    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -64,14 +61,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public User getUser() {
