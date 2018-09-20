@@ -14,10 +14,6 @@ public class Product {
     private String name;
     private double price;
     private String description;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @OneToMany(targetEntity = Image.class)
     List<Image> images;
@@ -61,14 +57,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<Image> getImages() {

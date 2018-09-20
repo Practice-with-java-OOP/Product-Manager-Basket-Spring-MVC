@@ -21,12 +21,12 @@ public class User implements Validator {
     private String address;
     private int age;
 
-    @OneToMany(targetEntity = Product.class)
-    private List<Product> products;
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(targetEntity = Goods.class)
+    List<Goods> goods;
 
     public User() {
     }
@@ -87,20 +87,20 @@ public class User implements Validator {
         this.age = age;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Goods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
     }
 
     public boolean index(String email, String pass) {
