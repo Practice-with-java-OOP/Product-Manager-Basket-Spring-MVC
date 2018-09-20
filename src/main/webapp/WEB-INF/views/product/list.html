@@ -11,6 +11,9 @@
     <input type="text" name="s"/>
     <input type="submit" value="Search"/>
 </form>
+<p>
+    <a href="/products/create">Create new product</a>
+</p>
 <table border="1">
     <tr>
         <th>Name</th>
@@ -26,7 +29,7 @@
             <td th:text="${product.name}"></td>
             <td th:text="${product.price}"></td>
             <td th:text="${product.description}"></td>
-            <td><a th:href="@{/products/uploadImage/__${product.id}__}">uploadImage</a></td>
+            <td><a th:href="@{/products/upload/__${product.id}__}">uploadImage</a></td>
             <td><a th:href="@{/products/edit/__${product.id}__}">edit</a></td>
             <td><a th:href="@{/products/delete/__${product.id}__}">delete</a></td>
             <td><a th:href="@{/products/detail/__${product.id}__}">detail</a></td>
