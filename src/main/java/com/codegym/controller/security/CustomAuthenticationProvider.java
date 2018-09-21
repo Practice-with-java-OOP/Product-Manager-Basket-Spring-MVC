@@ -30,10 +30,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         List<User> users = new ArrayList<>();
 
-        Iterable<User> us = userService.findAll();
-        for (User u : us) {
-            users.add(u);
-        }
+        userService.findAll().forEach(users::add);
 
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
