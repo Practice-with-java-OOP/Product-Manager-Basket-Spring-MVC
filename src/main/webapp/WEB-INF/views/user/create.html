@@ -35,6 +35,20 @@
     <link rel="stylesheet" type="text/css" href="../../../resource/create-template/css/util.css">
     <link rel="stylesheet" type="text/css" href="../../../resource/create-template/css/main.css">
     <!--===============================================================================================-->
+    <script type="text/javascript">
+        window.onload = function () {
+            var txtPassword = document.getElementById("txtPassword");
+            var txtConfirmPassword = document.getElementById("txtConfirmPassword");
+            txtPassword.onchange = ConfirmPassword;
+            txtConfirmPassword.onkeyup = ConfirmPassword;
+            function ConfirmPassword() {
+                txtConfirmPassword.setCustomValidity("");
+                if (txtPassword.value !== txtConfirmPassword.value) {
+                    txtConfirmPassword.setCustomValidity("Passwords do not match.");
+                }
+            }
+        }
+    </script>
 </head>
 <body style="background-color: #999999;">
 
@@ -67,9 +81,15 @@
                 <div class="wrap-input100 validate-input"
                      data-validate="Password > 5char and have at least one letter written in harmony or one number ">
                     <span class="label-input100">Password</span>
-                    <input class="input100" type="password" placeholder="*************" th:field="*{pass}">
+                    <input class="input100" id="txtPassword" type="password" placeholder="*************" th:field="*{pass}">
                     <span class="focus-input100"></span>
                     <small th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}" class="text-danger"></small>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" id="txtConfirmPassword" type="password" placeholder="*************">
+                    <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Address not empty">
