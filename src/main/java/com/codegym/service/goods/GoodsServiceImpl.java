@@ -1,6 +1,7 @@
 package com.codegym.service.goods;
 
 import com.codegym.model.Goods;
+import com.codegym.model.User;
 import com.codegym.repository.GoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,5 +28,10 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void remove(Long id) {
         goodsRepository.delete(id);
+    }
+
+    @Override
+    public Iterable<Goods> findAllByUser(User user) {
+        return goodsRepository.findAllByUser(user);
     }
 }

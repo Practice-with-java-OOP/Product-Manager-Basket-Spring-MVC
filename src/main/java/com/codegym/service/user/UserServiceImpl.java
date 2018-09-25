@@ -1,5 +1,6 @@
 package com.codegym.service.user;
 
+import com.codegym.model.Goods;
 import com.codegym.model.Role;
 import com.codegym.model.User;
 import com.codegym.repository.UserRepository;

@@ -1,6 +1,7 @@
 package com.codegym.service.goods;
 
 import com.codegym.model.Goods;
+import com.codegym.model.User;
 
 public interface GoodsService {
 
@@ -11,4 +12,6 @@ public interface GoodsService {
     void save(Goods goods);
 
     void remove(Long id);
+
+    Iterable<Goods> findAllByUser(User user);
 }
